@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Atributos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <label for="compras">Compras</label>
+        <ul id="compras" destino='escritório' data-urgencia="5">
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        const lista = document.querySelector('div ul[destino="escritório"]') //pode substituir todo o conteudo por #compras
+        console.log('Elemento "ul"....................')
+        console.log('childNodes', lista.childNodes)
+        console.log('destino', lista.destino) //undefined... pq é uma anotação personalizada. Deve ser acessado por getAttribute
+        console.log('getAttribute', lista.getAttribute('destino'))
+        console.log('hasAttribute', lista.hasAttribute('destino'))
+        lista.setAttribute('destino', 'empresa') //é possível modificar os valores dos atributos
+        lista.setAttribute('status', 'aberto') // também é possível adicionar atributos
+        lista.removeAttribute('destino')
+
+        //tem diferença quando o atributo começa com 'data-'
+        //a diferença é apenas por padronização, na prática nao faz diferença se não usar...
+        console.log(lista.dataset)
+        console.log(lista.dataset.urgencia)
+        lista.dataset.urgencia = 4 //é possível alterar o valor do atributo assim...
+        //pode também ser acessado através do método getAttribute..
+        console.log(lista.getAttribute('data-urgencia'))
+
+        //cuidado...
+        const label = document.querySelector('label')
+        console.log(label.for) // por ser uma palavra reservada da linguagem, não é possível acessar...
+        console.log(label.htmlFor) //deve ser colocado o prefixo html com a primeira letra do atributo maiúscula..
+        console.log(label.getAttribute('for'))
+    </script>
+</body>
+
+</html>
